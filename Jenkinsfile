@@ -27,7 +27,10 @@ pipeline {
 
         stage('Deliver') {
             steps {
-                sh 'cp -r target/SpringBootApp target/SpringBootApp.war /var/lib/docker/volumes/jenkins-tomcat/_data'
+                sh '''
+                   sudo su 
+                   cp -r target/SpringBootApp target/SpringBootApp.war /var/lib/docker/volumes/jenkins-tomcat/_data
+                   '''
                  
             }
         }
