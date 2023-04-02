@@ -6,6 +6,7 @@ pipeline {
      }
     tools {
         maven 'Maven' // specify the tool identifier
+        snyk  'Snyk' // specify the tool identifier
     }
     
     stages {
@@ -24,6 +25,17 @@ pipeline {
                 }
             }
         }
+        stage('Security Scan') {                    // snyk stage
+            steps {
+               withCredentials([string(credentialsId: 'SNYK_API_TOKEN', variable: 'SNYK_API_KEY')]) {
+               sh '''
+                  export SNYK_TOKEN=$SNYK_API_KEY
+                  snyk test
+                  snyk monitor
+                  '''
+             }
+          }
+       }
 
         stage('Deliver') {
             steps {
