@@ -30,8 +30,8 @@ pipeline {
                withCredentials([string(credentialsId: 'SNYK_API_TOKEN', variable: 'SNYK_API_KEY')]) {
                sh '''
                   export SNYK_TOKEN=$SNYK_API_KEY
-                  snyk test
-                  snyk monitor
+                  /usr/bin/snyk test
+                  /usr/bin/snyk monitor
                   '''
              }
           }
