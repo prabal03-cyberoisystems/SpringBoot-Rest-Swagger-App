@@ -27,7 +27,7 @@ pipeline {
 
         stage('Deliver') {
             steps {
-                sh 'echo "Hii"'
+                sh 'ls'
             }
         }
     }
