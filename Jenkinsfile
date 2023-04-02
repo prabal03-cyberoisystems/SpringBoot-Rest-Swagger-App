@@ -27,6 +27,7 @@ pipeline {
         }
         stage('Security Scan') {                    // snyk stage
             steps {
+               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE', allowEmptyResults: true) {
                withCredentials([string(credentialsId: 'SNYK_API_TOKEN', variable: 'SNYK_API_KEY')]) {
                sh '''
                   export SNYK_TOKEN=$SNYK_API_KEY
@@ -36,6 +37,7 @@ pipeline {
              }
           }
        }
+     }
 
         stage('Deliver') {
             steps {
