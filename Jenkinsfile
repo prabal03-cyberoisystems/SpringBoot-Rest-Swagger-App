@@ -1,5 +1,9 @@
 pipeline {
-    agent jenkins-node-1
+    agent {
+        node {
+              label 'jenkins-node-1'
+          }
+     }
     tools {
         maven 'Maven' // specify the tool identifier
     }
