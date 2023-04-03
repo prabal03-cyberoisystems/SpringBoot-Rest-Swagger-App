@@ -42,7 +42,7 @@ pipeline {
            steps {
                recordIssues(
                enabledForFailure: true, aggregatingResults: true, 
-               tools: [java(), checkStyle(pattern: 'checkstyle-result.xml', reportEncoding: 'UTF-8')]
+               tools: [java(), checkStyle(pattern: '*.xml', reportEncoding: 'UTF-8')]
                )
             }
         }
@@ -55,4 +55,3 @@ pipeline {
         }
     }
 }
-
