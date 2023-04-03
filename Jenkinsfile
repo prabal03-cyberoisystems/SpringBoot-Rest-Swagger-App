@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('SonarQube analysis') {    
          steps {         
-             withSonarQubeEnv('SonarQube',[sonarqubeScanner('SonarQube')]) {     
+             withSonarQubeEnv('SonarQube', [sonarqubeScanner('SonarQube')]) {     
                      sh 'sonar-scanner'
            }
          }
