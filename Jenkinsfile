@@ -1,13 +1,13 @@
 pipeline {
     agent {
         node {
-              label 'jenkins-node-1'
+              label 'jenkins-node-1'               // Node In which jenkins will deploy
           }
      }
     tools {
-        maven 'Maven' // specify the tool identifier
+        maven 'Maven' // specify the tool identifier  // Declarative tools will install at run time
         snyk  'Snyk' // specify the tool identifier
-    }
+    } 
     
     stages {
         stage('Build') {                           // Build stage 
@@ -38,8 +38,16 @@ pipeline {
           }
        }
      }
+        stage('QA test') {                          // QA test stage
+           steps {
+               recordIssues(
+               enabledForFailure: true, aggregatingResults: true, 
+               tools: [java(), checkStyle(pattern: 'checkstyle-result.xml', reportEncoding: 'UTF-8')]
+               )
+            }
+        }
 
-        stage('Deliver') {
+        stage('Deliver') {                           // Delivery Stage
             steps {
                 sh 'sudo cp -r target/SpringBootApp target/SpringBootApp.war /var/lib/docker/volumes/jenkins-tomcat/_data'
                  
@@ -47,5 +55,3 @@ pipeline {
         }
     }
 }
-
-
