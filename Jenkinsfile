@@ -7,9 +7,17 @@ pipeline {
     tools {
         maven 'Maven' // specify the tool identifier  // Declarative tools will install at run time
         snyk  'Snyk' // specify the tool identifier
+        sonarqube 'SonarQube_Scanner'
     } 
     
     stages {
+        stage('SonarQube analysis') {    
+         steps {         
+             withSonarQubeEnv('SonarQube') {     
+                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectkey=sqa_7395bddb9b17c6a3a793a6302ddd9a7ababc28d8"
+           }
+         }
+       }
         stage('Build') {                           // Build stage 
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -38,14 +46,6 @@ pipeline {
           }
        }
      }
-        stage('QA test') {                          // QA test stage
-           steps {
-               recordIssues(
-               enabledForFailure: true, aggregatingResults: true,
-               tools: [java(), checkStyle(pattern: 'checkstyle-result.xml', reportEncoding: 'UTF-8')]
-               )
-            }
-        }
 
         stage('Deliver') {                           // Delivery Stage
             steps {
