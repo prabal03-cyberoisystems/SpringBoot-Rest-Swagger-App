@@ -41,8 +41,8 @@ pipeline {
         stage('QA test') {                          // QA test stage
            steps {
                recordIssues(
-               enabledForFailure: true, aggregatingResults: true, 
-               tools: [java(), checkStyle(pattern: '*.xml', reportEncoding: 'UTF-8')]
+               enabledForFailure: true, aggregatingResults: true,
+               tools: [java(), checkStyle(pattern: 'checkstyle-result.xml', reportEncoding: 'UTF-8')]
                )
             }
         }
