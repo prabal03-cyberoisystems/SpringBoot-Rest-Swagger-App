@@ -17,7 +17,7 @@ pipeline {
           scannerHome = tool 'SonarQube'
         }
              withSonarQubeEnv('SonarQube') {     
-                     sh "${scannerHome}/bin/sonar-scanner"
+                     sh "mvn sonar:sonar -Dsonar.projectKey=bridget-sonarqube -Dsonar.projectName='bridget'"
            }
          }
        }
