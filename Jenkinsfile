@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('SonarQube analysis') {    
         tools {
-              sonarQube 'SonarQube'
+              sonarQube 'SonarQube Scanner 2.8'
       }
          steps {         
              withSonarQubeEnv('SonarQube') {     
