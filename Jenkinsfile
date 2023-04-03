@@ -13,7 +13,7 @@ pipeline {
         stage('SonarQube analysis') {    
          steps {         
              withSonarQubeEnv('SonarQube') {     
-                     sh "${tool 'SonarQube'}/bin/sonar-scanner -Dsonar.projectkey=sqa_7395bddb9b17c6a3a793a6302ddd9a7ababc28d8"
+                     sh "${tool 'SonarQube'}/bin/sonar-scanner -Dsonar.projectkey=bridget-sonarqube"
            }
          }
        }
