@@ -7,14 +7,14 @@ pipeline {
     tools {
         maven 'Maven' // specify the tool identifier  // Declarative tools will install at run time
         snyk  'Snyk' // specify the tool identifier
-        SonarqubeScanner 'SonarQube_Scanner'
+        SonarqubeScanner 'SonarQube'
     } 
     
     stages {
         stage('SonarQube analysis') {    
          steps {         
              withSonarQubeEnv('SonarQube') {     
-                     sh "${tool 'SonarQube_Scanner'}/bin/sonar-scanner -Dsonar.projectkey=sqa_7395bddb9b17c6a3a793a6302ddd9a7ababc28d8"
+                     sh "${tool 'SonarQube'}/bin/sonar-scanner -Dsonar.projectkey=sqa_7395bddb9b17c6a3a793a6302ddd9a7ababc28d8"
            }
          }
        }
