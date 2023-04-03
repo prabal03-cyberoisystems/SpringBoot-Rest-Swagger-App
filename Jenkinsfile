@@ -11,9 +11,10 @@ pipeline {
     
     stages {
         stage('SonarQube analysis') {    
-        tools {
-              hudson.plugins.sonar.SonarRunnerInstallation 'SonarQube'
-      }
+        script {
+          // requires SonarQube Scanner 2.8+
+          scannerHome = tool 'SonarQube Scanner 2.8'
+        }
          steps {         
              withSonarQubeEnv('SonarQube') {     
                      sh 'sonar-scanner'
