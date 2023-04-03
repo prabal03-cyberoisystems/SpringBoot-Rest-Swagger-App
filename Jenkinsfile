@@ -10,7 +10,7 @@ pipeline {
     } 
     
     stages {
-        stage('SonarQube analysis') {    
+        stage('SonarQube analysis') {                // sonarqube stage
          steps {         
           script {
           // requires SonarQube Scanner 2.8+
@@ -21,6 +21,14 @@ pipeline {
            }
          }
        }
+        stage('CheckStyle') {                           // CheckStyle stage
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                sh 'mvn checkstyle:check'
+            }
+         }
+      }
+
         stage('Build') {                           // Build stage 
             steps {
                 sh 'mvn -B -DskipTests clean package'
