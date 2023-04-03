@@ -7,13 +7,14 @@ pipeline {
     tools {
         maven 'Maven' // specify the tool identifier  // Declarative tools will install at run time
         snyk  'Snyk' // specify the tool identifier
+        sonarqubeScanner 'SonarQube' 
     } 
     
     stages {
         stage('SonarQube analysis') {    
          steps {         
              withSonarQubeEnv('SonarQube') {     
-                     sh '${tool 'SonarQube'}/bin/sonar-scanner'
+                     sh 'sonar-scanner'
            }
          }
        }
